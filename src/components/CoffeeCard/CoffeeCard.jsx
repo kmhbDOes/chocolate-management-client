@@ -13,7 +13,7 @@ const CoffeeCard = () => {
       <h2>
         <Link to="/add-new">Add New Chocolate</Link>
       </h2>
-      {chocolate.map((c) => (
+      {newState.map((c) => (
         <CoffeeCardDetails
           key={c._id}
           c={c}
