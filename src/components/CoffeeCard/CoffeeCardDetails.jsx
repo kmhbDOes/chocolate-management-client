@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 
-const CoffeeDetails = () => {
+const CoffeeCardDetails = ({ c }) => {
   return (
     <div>
-      <h3>Coffee Details</h3>
+      <h2> {c.coffee}</h2>
       <Card style={{ width: "18rem" }}>
         <Card.Img variant="top" src="holder.js/100px180" />
         <Card.Body>
@@ -20,4 +20,4 @@ const CoffeeDetails = () => {
   );
 };
 
-export default CoffeeDetails;
+export default CoffeeCardDetails;

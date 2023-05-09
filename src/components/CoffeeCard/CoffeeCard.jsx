@@ -1,27 +1,17 @@
 import React from "react";
+import { Card, Button } from "react-bootstrap";
+import { Link, useLoaderData } from "react-router-dom";
+import CoffeeCardDetails from "./CoffeeCardDetails";
 
 const CoffeeCard = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const coffee = form.coffee.value;
-    const quantity = form.quantity.value;
+  const chocolate = useLoaderData();
 
-    const inputs = { coffee, quantity };
-
-    console.log(inputs);
-  };
   return (
     <div className="bg-info text-center">
-      <h2>Coffee Card:</h2>
-
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="coffee" />
-        <br />
-        <input type="text" name="quantity" />
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
+      <h2>Chocolate</h2>
+      {chocolate.map((c) => (
+        <CoffeeCardDetails key={c._id} c={c}></CoffeeCardDetails>
+      ))}
     </div>
   );
 };
