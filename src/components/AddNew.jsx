@@ -8,9 +8,10 @@ const AddNew = () => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
-    const quantity = form.quantity.value;
+    const country = form.country.value;
+    const category = form.category.value;
 
-    const inputs = { name, quantity };
+    const inputs = { name, country, category };
 
     console.log(inputs);
 
@@ -40,11 +41,35 @@ const AddNew = () => {
       <h2>Chocolate Card:</h2>
       <Link to="/">Back to All Chocolates</Link>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name" />
+        <input
+          className="rounded-pill"
+          type="text"
+          name="name"
+          placeholder="Name"
+        />
         <br />
-        <input type="text" name="quantity" />
+        <input
+          className="my-2"
+          type="text"
+          name="country"
+          placeholder="Country"
+        />
         <br />
-        <input type="submit" value="Submit" />
+        <input
+          className="my-2"
+          type="text"
+          name="category"
+          placeholder="Category"
+        />
+        <br />
+        <input
+          className="my-2"
+          type="text"
+          name="photo"
+          placeholder="Photo URL"
+        />
+        <br />
+        <input className="my-2" type="submit" value="Submit" />
       </form>
     </div>
   );
