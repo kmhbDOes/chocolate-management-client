@@ -10,8 +10,9 @@ const AddNew = () => {
     const name = form.name.value;
     const country = form.country.value;
     const category = form.category.value;
+    const photo = form.photo.value;
 
-    const inputs = { name, country, category };
+    const inputs = { name, country, category, photo };
 
     console.log(inputs);
 

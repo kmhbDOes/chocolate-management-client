@@ -1,21 +1,78 @@
 import React from "react";
-import { Button, Card } from "react-bootstrap";
+import Swal from "sweetalert2";
+import { Link, useLoaderData } from "react-router-dom";
 
 const CoffeeDetails = () => {
+  const c = useLoaderData();
+  const { _id, name, category, country } = c;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const country = form.country.value;
+    const category = form.category.value;
+
+    const inputs = { name, country, category };
+
+    console.log(inputs);
+
+    //Send data to server
+    fetch("http://localhost:5000/chocolate", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(inputs),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Do you want to continue",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+        }
+      });
+  };
   return (
-    <div>
-      <h3>Coffee Details</h3>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
-        <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
+    <div className="bg-info text-center">
+      <h2>Update Chocolate</h2>
+      <Link to="/">Back to All Chocolates</Link>
+      <form onSubmit={handleSubmit}>
+        <input
+          className="rounded-pill"
+          type="text"
+          name="name"
+          placeholder="Name"
+          defaultValue={name}
+        />
+        <br />
+        <input
+          className="my-2"
+          type="text"
+          name="country"
+          placeholder="Country"
+        />
+        <br />
+        <input
+          className="my-2"
+          type="text"
+          name="category"
+          placeholder="Category"
+        />
+        <br />
+        <input
+          className="my-2"
+          type="text"
+          name="photo"
+          placeholder="Photo URL"
+        />
+        <br />
+        <input className="my-2" type="submit" value="Submit" />
+      </form>
     </div>
   );
 };
