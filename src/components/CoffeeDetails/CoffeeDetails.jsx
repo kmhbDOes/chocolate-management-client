@@ -11,14 +11,15 @@ const CoffeeDetails = () => {
     const name = form.name.value;
     const country = form.country.value;
     const category = form.category.value;
+    const photo = form.photo.value;
 
-    const inputs = { name, country, category };
+    const inputs = { _id, name, country, category, photo };
 
     console.log(inputs);
 
     //Send data to server
-    fetch("http://localhost:5000/chocolate", {
-      method: "POST",
+    fetch(`http://localhost:5000/chocolate/${_id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
@@ -27,10 +28,10 @@ const CoffeeDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.insertedId) {
+        if (data.modifiedCount > 0) {
           Swal.fire({
             title: "Success!",
-            text: "Do you want to continue",
+            text: "Chocolate Updated Successfully",
             icon: "success",
             confirmButtonText: "Cool",
           });
@@ -55,6 +56,7 @@ const CoffeeDetails = () => {
           type="text"
           name="country"
           placeholder="Country"
+          defaultValue={country}
         />
         <br />
         <input
@@ -62,6 +64,7 @@ const CoffeeDetails = () => {
           type="text"
           name="category"
           placeholder="Category"
+          defaultValue={category}
         />
         <br />
         <input
@@ -69,6 +72,7 @@ const CoffeeDetails = () => {
           type="text"
           name="photo"
           placeholder="Photo URL"
+          // defaultValue={photo}
         />
         <br />
         <input className="my-2" type="submit" value="Submit" />

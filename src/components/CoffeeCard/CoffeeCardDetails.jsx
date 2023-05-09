@@ -3,7 +3,7 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CoffeeCardDetails = ({ c }) => {
+const CoffeeCardDetails = ({ c, newState, setNewState }) => {
   const { _id, name, category, country, photo } = c;
 
   const handleDelete = (_id) => {
@@ -26,6 +26,8 @@ const CoffeeCardDetails = ({ c }) => {
             console.log(data);
             if (data.deletedCount > 0) {
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              const remaining = newState.filter((cl) => cl._id !== _id);
+              setNewState(remaining);
             }
           });
       }
@@ -33,14 +35,17 @@ const CoffeeCardDetails = ({ c }) => {
   };
   return (
     <div>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={photo} />
-        <Card.Body className="">
+      <Card className="w-100">
+        <Card.Body className="d-flex justify-content-center">
+          <Card.Img
+            className="img-thumbnail rounded "
+            variant="top"
+            src=""
+            alt="unavailable"
+          />
           <Card.Title>{name}</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
+          <Card.Text>{category}</Card.Text>
+          <Card.Text>{country}</Card.Text>
           <Link to={`/coffee-details/${_id}`}>
             <Button className="mx-2" variant="primary">
               Edit
